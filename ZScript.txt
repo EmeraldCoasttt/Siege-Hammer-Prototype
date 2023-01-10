@@ -21,6 +21,89 @@ CLASS SiegeHammer : Brutalweapon
 
 	}
 	
+	
+		action void A_DoHammer(double range, double ang)
+			{	
+				Vector3 viewPos = (pos.xy, player.viewz); // player view point
+				Vector3 viewDir = (AngleToVector(angle, cos(pitch)), -sin(pitch)); // player view direction
+				double maxAngle = cos(ang);
+    
+				let it = ThinkerIterator.Create("Actor", STAT_DEFAULT);
+						Actor mo;
+					while (mo = Actor(it.Next()))
+			{
+				// get the object's bounding box
+				Vector3 rel = mo.PosRelative(CurSector); // account for sector portals
+				Vector3 minBox = rel - (mo.radius, mo.radius, 0);
+				Vector3 maxBox = rel + (mo.radius, mo.radius, mo.height);
+        
+				// get the point on the box nearest the view point
+				Vector3 nearest;
+				nearest.x = max(minBox.x, min(viewPos.x, maxBox.x));
+				nearest.y = max(minBox.y, min(viewPos.y, maxBox.y));
+				nearest.z = max(minBox.z, min(viewPos.z, maxBox.z));
+        
+				Vector3 dir = nearest - viewPos;
+				double dist = dir.Length();
+				if (dist > 0)
+				{
+					if (dist > range) // is it in range?
+						continue;
+            
+					if (viewDir dot (dir / dist) < maxAngle) // is it within an acceptable angle?
+						continue;
+						
+					If
+						
+				
+				}
+					If(mo.species == "marines")
+						Continue;
+				If(mo.bshootable || mo.bmissile)
+				{
+					If(mo.bspawnceiling || mo.health < 1 || mo is "headkicking" || mo is "BDECGRASS" || mo is "Brutal_Bloodspot")
+					{
+						Continue;
+					}
+					
+					Vector3 HammerCoords = LevelLocals.SphericalCoords(mo.pos,invoker.owner.pos);
+					
+					If(mo.bmissile)
+					{
+						actor PreviousTarget;
+						If(mo.target)
+						{
+							previoustarget = mo.target;
+						}
+						mo.target = invoker.owner;
+						mo.pitch = (mo.pitch - 180);
+						mo.angle = (mo.angle - 180);
+						mo.vel.x = -mo.vel.x;
+						mo.vel.y = -mo.vel.y;
+						mo.vel.z = -mo.vel.z;
+						If(previousTarget)
+						{
+							mo.tracer = previoustarget;
+						}
+					}
+					
+					Else
+					{
+						
+						mo.vel3dfromangle(25,invoker.owner.angleto(mo,TRUE),random(-20,-40));
+						mo.damagemobj(invoker,invoker.owner,frandom(130,170),"ExtremePunches",DMG_THRUSTLESS);
+						
+						
+					}
+					
+				}
+				
+					Continue;
+				
+        // grab it
+        break;
+    }
+}
 	States
 	{
 	
@@ -95,6 +178,19 @@ CLASS SiegeHammer : Brutalweapon
 		Ready:
 			HAMR A 1 A_weaponreadyDX(WRF_ALLOWRELOAD);
 			LOOP;
+			
+		Fire:
+			HAMR B 1;
+		//FireHold:
+			HAMR C 1
+			{
+				Radius_Quake(4,14,0,12,0);
+				A_DoHammer(300,45);
+			}
+			HAMR C 30;
+			//TNT1 A 0 A_refire("firehold");
+			HAMR CCB 1;
+			Goto ready;
 
 	
 		Spawn:
