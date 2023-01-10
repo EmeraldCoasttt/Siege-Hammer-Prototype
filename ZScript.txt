@@ -53,7 +53,8 @@ CLASS SiegeHammer : Brutalweapon
 					if (viewDir dot (dir / dist) < maxAngle) // is it within an acceptable angle?
 						continue;
 						
-					If
+					If (!invoker.owner.CheckSight(mo,SF_IGNOREWATERBOUNDARY))
+						continue;
 						
 				
 				}
@@ -91,7 +92,7 @@ CLASS SiegeHammer : Brutalweapon
 					{
 						
 						mo.vel3dfromangle(25,invoker.owner.angleto(mo,TRUE),random(-20,-40));
-						mo.damagemobj(invoker,invoker.owner,frandom(130,170),"ExtremePunches",DMG_THRUSTLESS);
+						mo.damagemobj(invoker,invoker.owner,frandom(200,500),"ExtremePunches",DMG_THRUSTLESS);
 						
 						
 					}
@@ -186,6 +187,11 @@ CLASS SiegeHammer : Brutalweapon
 			{
 				Radius_Quake(4,14,0,12,0);
 				A_DoHammer(300,45);
+				If(countinv("soulammo") < 30)
+				{
+					A_damageself(20,"desintegrate");
+				}
+				takeinventory("soulammo",30);
 			}
 			HAMR C 30;
 			//TNT1 A 0 A_refire("firehold");
