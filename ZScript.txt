@@ -93,7 +93,13 @@ CLASS SiegeHammer : Brutalweapon
 						
 						mo.vel3dfromangle(25,invoker.owner.angleto(mo,TRUE),random(-20,-40));
 						mo.damagemobj(invoker,invoker.owner,frandom(200,500),"normal",DMG_THRUSTLESS);
-						
+						If(!mo.bnoblood)
+						{
+							vector3 bloodspawn = mo.pos;
+							bloodspawn.z = (bloodspawn.z + (mo.height * 0.5));
+							
+							Mo.spawnblood(bloodspawn,invoker.owner.angleto(mo,TRUE),1);
+						}
 						
 					}
 					
