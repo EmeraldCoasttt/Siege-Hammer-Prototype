@@ -22,7 +22,7 @@ CLASS SiegeHammer : Brutalweapon
 	}
 	
 	
-		action void A_DoHammer(double range, double ang)
+		action void A_DoHammer(double range, double ang, bool damaging = true)
 			{	
 				Vector3 viewPos = (pos.xy, player.viewz); // player view point
 				Vector3 viewDir = (AngleToVector(angle, cos(pitch)), -sin(pitch)); // player view direction
@@ -92,15 +92,17 @@ CLASS SiegeHammer : Brutalweapon
 					{
 						
 						mo.vel3dfromangle(25,invoker.owner.angleto(mo,TRUE),random(-20,-40));
-						mo.damagemobj(invoker,invoker.owner,frandom(200,500),"normal",DMG_THRUSTLESS);
-						If(!mo.bnoblood)
+						If(damaging)
 						{
-							vector3 bloodspawn = mo.pos;
-							bloodspawn.z = (bloodspawn.z + (mo.height * 0.5));
+							mo.damagemobj(invoker,invoker.owner,frandom(200,500),"normal",DMG_THRUSTLESS);
+							If(!mo.bnoblood)
+							{
+								vector3 bloodspawn = mo.pos;
+								bloodspawn.z = (bloodspawn.z + (mo.height * 0.5));
 							
-							Mo.spawnblood(bloodspawn,invoker.owner.angleto(mo,TRUE),1);
+								Mo.spawnblood(bloodspawn,invoker.owner.angleto(mo,TRUE),1);
+							}
 						}
-						
 					}
 					
 				}
@@ -189,8 +191,11 @@ CLASS SiegeHammer : Brutalweapon
 		Fire:
 			HAMR BCDEEEEEE 1;// A_SetPitch(pitch-10, SPF_INTERPOLATE);
 			HAMR EE 1;
-			HAMR EFG 1; //A_SetPitch(pitch+5, SPF_INTERPOLATE);
-		//FireHold:
+		FireHold:
+			HAMR E 1;
+			//TNT1 A 0 A_refire("firehold");
+			HAMR FG 1; //A_SetPitch(pitch+5, SPF_INTERPOLATE);
+		
 			HAMR H 1
 			{
 				Radius_Quake(4,14,0,12,0);
