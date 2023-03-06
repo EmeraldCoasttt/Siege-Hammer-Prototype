@@ -187,7 +187,9 @@ CLASS SiegeHammer : Brutalweapon
 			LOOP;
 			
 		Fire:
-			HAMR BCDEEEEEEEEEFG 1;
+			HAMR BCDEEEEEE 1;// A_SetPitch(pitch-10, SPF_INTERPOLATE);
+			HAMR EE 1;
+			HAMR EFG 1; //A_SetPitch(pitch+5, SPF_INTERPOLATE);
 		//FireHold:
 			HAMR H 1
 			{
@@ -198,10 +200,12 @@ CLASS SiegeHammer : Brutalweapon
 					A_damageself(20,"desintegrate");
 				}
 				takeinventory("soulammo",30);
+				//A_SetPitch(pitch-7, SPF_INTERPOLATE);
 			}
-			HAMR H 30;
+			HAMR IJJJJJJJJJJJJ 1 A_WeaponOffset( random(3,-3) , 32+random(3,-3), 0);
+			HAMR J 17;
 			//TNT1 A 0 A_refire("firehold");
-			HAMR HGFEDCB 1;
+			HAMR JGFEDCB 1;
 			Goto ready;
 
 	
