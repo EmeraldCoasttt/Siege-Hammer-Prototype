@@ -9,7 +9,7 @@ CLASS SiegeHammer : Brutalweapon
 	Weapon.AmmoGive2 0;
 	Weapon.AmmoType1 "SoulAmmo";
 	Obituary "%o was smooshed by %k's Hammer.";
-    Inventory.PickupSound "RAILINSR";
+    Inventory.PickupSound "BDP/Weapon/Hammer/Select";
 	Inventory.Pickupmessage "You got the Siege Hammer! (Slot 1)";
 	+WEAPON.NOAUTOAIM;
 	+WEAPON.NOALERT;
@@ -152,14 +152,14 @@ CLASS SiegeHammer : Brutalweapon
 
 		Select:
 			TNT1 A 0;
-			NULL A 0{if(GetCVAR("bd_SmartCrosshairs") == 1){A_SetCrosshair(GetCVAR("RailgunCrosshair"));}else{A_SetCrosshair(0);}}
+			//NULL A 0{if(GetCVAR("bd_SmartCrosshairs") == 1){A_SetCrosshair(GetCVAR("RailgunCrosshair"));}else{A_SetCrosshair(0);}}
 			Goto SelectFirstPersonLegs;
 		SelectContinue: "####" A 0 A_GiveInventory("IsPlayingDoxMod",1); 
 			UNHG A 0 A_takeinventory("disabletilting",1);
 			TNT1 AAAAAAAAAAAAAA 0 A_Raise();
 			TNT1 A 1 A_Raise();
 		ReturnFromNothing:
-			TNT1 A 0 A_startSound("UNMAKSEL",1);
+			TNT1 A 0 A_startSound("BDP/Weapon/Hammer/Select",1);
 			TNT1 AAA 0;
 			Goto SelectAnimation;
 
@@ -182,15 +182,19 @@ CLASS SiegeHammer : Brutalweapon
 			HAMR A 1 A_weaponreadyDX(WRF_ALLOWRELOAD);
 			LOOP;
 		Fire:
+			
+			HAMR A  0 A_startsound("BDP/Weapon/Hammer/Swing",1,0,0.5);
 			HAMR BCDEFGGGGG 1;// A_SetPitch(pitch-10, SPF_INTERPOLATE);
+			
 			HAMR G 2;
 		FireHold:
 			HAMR G 1;
 			//TNT1 A 0 A_refire("firehold");
 			HAMR HIJKLMNO 1; //A_SetPitch(pitch+5, SPF_INTERPOLATE);
 
-			HAMR PQ 1
+			HAMR A 0
 			{
+				A_startsound("BDP/Weapon/Hammer/Impact",1);
 				Radius_Quake(4,14,0,12,0);
 				A_DoHammer(300,90);
 				If(countinv("soulammo") < 30)
@@ -200,6 +204,7 @@ CLASS SiegeHammer : Brutalweapon
 				takeinventory("soulammo",30);
 				//A_SetPitch(pitch-7, SPF_INTERPOLATE);
 			}
+			HAMR PQ 1;
 			HAMR RRRRRRRRRRRRRR 1 A_WeaponOffset( random(3,-3) , 32+random(3,-3), 0);
 			HAMR R 17;
 			//TNT1 A 0 A_refire("firehold");
