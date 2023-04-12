@@ -1,1 +1,1 @@
-SiegeHammer,chainsaw,2
+Tenderizer,chainsaw,2

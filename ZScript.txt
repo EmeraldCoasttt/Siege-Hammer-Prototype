@@ -1,4 +1,4 @@
-CLASS SiegeHammer : Brutalweapon
+CLASS Tenderizer : Brutalweapon
 {
 	Default
 	
@@ -8,9 +8,9 @@ CLASS SiegeHammer : Brutalweapon
 	Weapon.AmmoGive1 0;
 	Weapon.AmmoGive2 0;
 	Weapon.AmmoType1 "SoulAmmo";
-	Obituary "%o was smooshed by %k's Hammer.";
+	Obituary "%o was tenderized by %k's Hammer.";
     Inventory.PickupSound "BDP/Weapon/Hammer/Select";
-	Inventory.Pickupmessage "You got the Siege Hammer! (Slot 1)";
+	Inventory.Pickupmessage "You got the Tenderizer! (Slot 1)";
 	+WEAPON.NOAUTOAIM;
 	+WEAPON.NOALERT;
 	+WEAPON.EXPLOSIVE;

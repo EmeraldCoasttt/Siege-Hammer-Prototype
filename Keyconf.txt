@@ -1,1 +1,1 @@
-addslotdefault 1 SiegeHammer
+addslotdefault 1 Tenderizer
