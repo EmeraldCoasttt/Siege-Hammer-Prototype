@@ -1,1 +1,1 @@
-addslotdefault 1 Tenderizer
+addslotdefault 8 Tenderizer

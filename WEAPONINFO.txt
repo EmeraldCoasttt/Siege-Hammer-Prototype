@@ -1,1 +1,1 @@
-Tenderizer,chainsaw,2
+Tenderizer,rocketlauncher,2
