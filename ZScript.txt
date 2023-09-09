@@ -219,10 +219,10 @@ CLASS Tenderizer : Brutalweapon
 				takeinventory("soulammo",30);
 				//A_SetPitch(pitch-7, SPF_INTERPOLATE);
 				A_SpawnItemEX("WhiteShockwaveSmall",cos(pitch)*64,0,32 -(sin(pitch)*64));
-				A_SpawnItemEX("BDExplosionParticles",cos(pitch)*64,0,32 -(sin(pitch)*64));
+				A_SpawnItemEX("BDExplosionParticlesRED",cos(pitch)*64,0,32 -(sin(pitch)*64));
 				for (int i = 15; i > 0; i--)
 				{
-					A_fireprojectile("explosionparticleveryfast",frandom(-25,25),0,0,0,0,frandom(3,-25));
+					A_fireprojectile("explosionparticleREDveryfast",frandom(-25,25),0,0,0,0,frandom(3,-25));
 				
 				}
 			}
