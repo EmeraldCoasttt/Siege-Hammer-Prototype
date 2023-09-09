@@ -124,15 +124,15 @@ CLASS Tenderizer : Brutalweapon
 			stop;
 
 		KickingFlash:
-			HAMG ABCDEEEEEEEEEEDCBA 1;
+			HAMG ABCDDDDDDDDDDDDCBA 1;
 			Goto Ready;
 		AirKickingFlash:
-			HAMG ABCDEEEEEEEEEEDCBA 1; //18
+			HAMG ABCDDDDDDDDDDDDCBA 1; //18
 			Goto Ready;
 
 		SlideKickingStart:
-			HAMG ABCDE 1;
-			HAMG EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 { //39 total
+			HAMG ABCDD 1;
+			HAMG DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD 1 { //39 total
 				if (CountInv("Kicking") == 0) {
 					return resolvestate("SlideKickingEnd");
 				}
@@ -141,11 +141,11 @@ CLASS Tenderizer : Brutalweapon
 			Goto Ready;
 
 		SlideKickingEnd:
-			HAMG EEEEEEDCBA 1; //10
+			HAMG DDDDDDDCBA 1; //10
 			Goto Ready;
 
 		SprintOverlay:
-			HAMG ABCDE 1;
+			HAMG ABCD 1;
 			Wait;
 
 		ReturnfromSprint:
