@@ -218,10 +218,17 @@ CLASS Tenderizer : Brutalweapon
 				}
 				takeinventory("soulammo",30);
 				//A_SetPitch(pitch-7, SPF_INTERPOLATE);
+				A_SpawnItemEX("WhiteShockwaveSmall",cos(pitch)*64,0,32 -(sin(pitch)*64));
+				A_SpawnItemEX("BDExplosionParticles",cos(pitch)*64,0,32 -(sin(pitch)*64));
+				for (int i = 15; i > 0; i--)
+				{
+					A_fireprojectile("explosionparticleveryfast",frandom(-25,25),0,0,0,0,frandom(3,-25));
+				
+				}
 			}
 			HAMR PQ 1;
 			HAMR RRRRRRRRRRRRRR 1 A_WeaponOffset( random(3,-3) , 32+random(3,-3), 0);
-			HAMR R 17;
+			HAMR R 10;
 			//TNT1 A 0 A_refire("firehold");
 			HAMB ONMLKJIHEDCBA 1;
 			Goto ready;
