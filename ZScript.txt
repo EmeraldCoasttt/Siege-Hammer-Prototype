@@ -299,7 +299,7 @@ CLASS Tenderizer : Brutalweapon
 			
 			 DualWield:
 		TNT1 A 0 A_takeinventory("startdualwield",1);
-		HAMG EFGHI 1;
+		HAMG EFGHIJK 1;
 		//TNT1 A 0 A_jumpifinventory("ammocell",1,1);
 		//Goto noammo;
 		TNT1 A 0
@@ -371,20 +371,21 @@ CLASS Tenderizer : Brutalweapon
 			}
 			//Return resolvestate(null);
 		}
-		BFGA A 1 BRIGHT A_ZoomFactor(0.96);
-        BFGA B 1 BRIGHT A_FireProjectile("GreenFlareSpawn",0,0,0,0);
+		HAMG O 2 A_ZoomFactor(0.96);
+        HAMG P 2; //A_FireProjectile("GreenFlareSpawn",0,0,0,0);
 		TNT1 A 0 A_SetPitch(Pitch-8, SPF_INTERPOLATE);
-		BFGA C 1 BRIGHT;
+		HAMG Q 1;
 		BFGN A 0 A_ZoomFactor(0.98);
-		BFGA DE 1 BRIGHT;
+		HAMG R 1;
         BFGN A 0 A_ZoomFactor(1.0);
-		BFGA F 1;
-		BFGA FFFFGGHIJK 1 A_SetPitch(Pitch+0.8, SPF_INTERPOLATE);
+		//BFGA F 1;
+		HAMG STKKKKKKKK 1 A_SetPitch(Pitch+0.8, SPF_INTERPOLATE);
 		//TNT1 A 0 A_JumpIfInventory("NoFancyShooting", 1, 10);// For poor PCs
 		//BFGN GHIGHI 1
 		//{
 		//	A_overlayoffset(overlayid(),frandom(-1,0),frandom(32,33));
 		//}
+		HAMG JIHGFE 1;
 		Goto ready;
 		GrabDie:
 		tnt1 A 0
@@ -421,7 +422,7 @@ CLASS Tenderizer : Brutalweapon
 		{
 			A_overlayoffset(overlayid(),frandom(-1,0),frandom(32,33));
 		}
-		HAMG IHGFE 1;
+		HAMG KJIHGFE 1;
 		Goto ready;
 		
 	
