@@ -25,6 +25,8 @@ CLASS Tenderizer : Brutalweapon
 	bool previousxy;
 	bool previousfriend;
 	
+	bool killyourself;
+	
 	Actor Grabbedactor;
 	
 	Int GrabbedTimer;
@@ -406,7 +408,15 @@ CLASS Tenderizer : Brutalweapon
 			invoker.Grabbedactor = null;
 			}
 			//Return resolvestate(null);
+			If(invoker.killyourself)
+				
+			{
+				//console.printf("KILLYOURSELF");
+				A_damageself(100,"desintegrate");
+				
+			}
 		}
+		
 		HAMG LMNLMN 1
 		{
 			A_overlayoffset(overlayid(),frandom(-1,0),frandom(32,33));
@@ -418,15 +428,32 @@ CLASS Tenderizer : Brutalweapon
 	
 		
 	Grabloop:
+		TNT1 A 0
+		{
+			If(invoker.owner.countinv("soulammo") <= 1)
+			{
+				A_damageself(1,"desintegrate");
+			}
+			Else
+			{
+				invoker.owner.takeinventory("soulammo",1);
+			}
+		}
 		HAMG LMNLMNLMN 1
 		{
-			invoker.grabbedtimer = invoker.grabbedtimer + 1;
+			//invoker.grabbedtimer = invoker.grabbedtimer + 1;
+			
 			A_startsound("GRBRLOOP",12,CHANF_LOOPING);
 			A_overlayoffset(overlayid(),frandom(-1,0),frandom(32,33));
-			If(player.cmd.buttons & bt_altattack || invoker.owner.findinventory("startdualwield") || invoker.grabbedtimer == 120)
+			If(invoker.owner.health < 2)
+					{
+						invoker.killyourself = true;
+					}
+			If(player.cmd.buttons & bt_altattack || invoker.owner.findinventory("startdualwield") || invoker.killyourself)
 				{
 					invoker.owner.takeinventory("startdualwield",1);
 					Return resolvestate("grabdie");
+					
 				}
 			If(invoker.grabbedactor && invoker.grabbedactor.health > 0)
 				{
