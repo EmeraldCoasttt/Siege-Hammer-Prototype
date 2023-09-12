@@ -142,6 +142,7 @@ CLASS Tenderizer : Brutalweapon
 						mo.vel.x = -mo.vel.x;
 						mo.vel.y = -mo.vel.y;
 						mo.vel.z = -mo.vel.z;
+						mo.giveinventory("grabberdamage",1);
 						If(previousTarget)
 						{
 							mo.tracer = previoustarget;
@@ -297,6 +298,40 @@ CLASS Tenderizer : Brutalweapon
 			HAMB ONMLKJIHEDCBA 1;
 			Goto ready;
 			
+			
+		AltFire:
+			HAMR A  0 A_startsound("BDP/Weapon/Hammer/Swing",1,0,1.0);
+			HAMG EFGHIJK 1;
+			HAMR A 0
+			{
+				A_startsound("GRBRFIRE",12);
+				If(countinv("soulammo") < 10)
+				{
+					A_damageself(3,"desintegrate");
+				}
+				takeinventory("soulammo",10);
+				A_dohammer(200,45,false);
+			}
+			HAMG O 2 A_ZoomFactor(0.96);
+        HAMG P 2; //A_FireProjectile("GreenFlareSpawn",0,0,0,0);
+		TNT1 A 0 A_SetPitch(Pitch-8, SPF_INTERPOLATE);
+		HAMG Q 1;
+		BFGN A 0 A_ZoomFactor(0.98);
+		HAMG R 1;
+        BFGN A 0 A_ZoomFactor(1.0);
+		//BFGA F 1;
+		HAMG STKKKKKKKK 1 A_SetPitch(Pitch+0.8, SPF_INTERPOLATE);
+		HAMG K 10;
+		//TNT1 A 0 A_JumpIfInventory("NoFancyShooting", 1, 10);// For poor PCs
+		//BFGN GHIGHI 1
+		//{
+		//	A_overlayoffset(overlayid(),frandom(-1,0),frandom(32,33));
+		//}
+		TNT1 A 0 A_startSound("BDP/Weapon/Hammer/Select",1);
+		HAMG JIHGFE 1;
+		Goto ready;
+		
+		
 			 DualWield:
 		TNT1 A 0 A_takeinventory("startdualwield",1);
 		HAMR A  0 A_startsound("BDP/Weapon/Hammer/Swing",1,0,1.0);
