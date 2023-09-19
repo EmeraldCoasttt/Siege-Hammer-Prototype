@@ -151,8 +151,10 @@ CLASS Tenderizer : Brutalweapon
 
 					Else
 					{
+						
 
 						mo.vel3dfromangle(25,invoker.owner.angleto(mo,TRUE),random(-20,-40));
+						mo.bblasted = true;
 						If(damaging)
 						{
 							mo.damagemobj(invoker,invoker.owner,frandom(200,500),"normal",DMG_THRUSTLESS);
