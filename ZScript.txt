@@ -83,7 +83,7 @@ CLASS Tenderizer : Brutalweapon
 				break;
 				}
 			}
-		action void A_DoHammer(double range, double ang, bool damaging = true)
+		action void A_DoHammer(double range, double ang, bool damaging = true, int damage = 500, string damagetype = "normal")
 			{
 				Vector3 viewPos = (pos.xy, player.viewz); // player view point
 				Vector3 viewDir = (AngleToVector(angle, cos(pitch)), -sin(pitch)); // player view direction
@@ -157,7 +157,7 @@ CLASS Tenderizer : Brutalweapon
 						//mo.bblasted = true;
 						If(damaging)
 						{
-							mo.damagemobj(invoker,invoker.owner,frandom(200,500),"normal",DMG_THRUSTLESS);
+							mo.damagemobj(invoker,invoker.owner,damage,damagetype,DMG_THRUSTLESS);
 							If(!mo.bnoblood)
 							{
 								vector3 bloodspawn = mo.pos;
@@ -165,10 +165,6 @@ CLASS Tenderizer : Brutalweapon
 							
 								Mo.spawnblood(bloodspawn,invoker.owner.angleto(mo,TRUE),1);
 							}
-						}
-						Else if (mo.health <= 100)
-						{
-							mo.damagemobj(invoker,invoker.owner,frandom(200,500),"extremepunches",DMG_THRUSTLESS);
 						}
 					}
 					
@@ -282,7 +278,7 @@ CLASS Tenderizer : Brutalweapon
 			{
 				A_startsound("BDP/Weapon/Hammer/Impact",1);
 				Radius_Quake(4,14,0,12,0);
-				A_DoHammer(300,90);
+				A_DoHammer(300,90,true,random(200,500));
 				A_recoil3d(10);
 				If(countinv("soulammo") < 30)
 				{
@@ -318,7 +314,7 @@ CLASS Tenderizer : Brutalweapon
 					A_damageself(3,"desintegrate");
 				}
 				takeinventory("soulammo",10);
-				A_dohammer(200,45,false);
+				A_dohammer(200,45,true,random(50,100),"ExtremePunches");
 				A_recoil3d(40);
 			}
 			HAMG O 2 A_ZoomFactor(0.96);
