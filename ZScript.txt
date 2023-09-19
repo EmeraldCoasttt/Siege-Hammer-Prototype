@@ -154,7 +154,7 @@ CLASS Tenderizer : Brutalweapon
 						
 
 						mo.vel3dfromangle(25,invoker.owner.angleto(mo,TRUE),random(-20,-40));
-						mo.bblasted = true;
+						//mo.bblasted = true;
 						If(damaging)
 						{
 							mo.damagemobj(invoker,invoker.owner,frandom(200,500),"normal",DMG_THRUSTLESS);
@@ -165,6 +165,10 @@ CLASS Tenderizer : Brutalweapon
 							
 								Mo.spawnblood(bloodspawn,invoker.owner.angleto(mo,TRUE),1);
 							}
+						}
+						Else if (mo.health <= 100)
+						{
+							mo.damagemobj(invoker,invoker.owner,frandom(200,500),"extremepunches",DMG_THRUSTLESS);
 						}
 					}
 					
